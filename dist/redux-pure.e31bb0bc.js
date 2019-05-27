@@ -867,6 +867,11 @@ var myCoolReducer = function myCoolReducer() {
 };
 
 var store = createStore(myCoolReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
+store.subscribe(function () {
+  var state = store.getState();
+  var node = document.getElementById("counter");
+  node.innerHTML = state.counter;
+});
 store.dispatch({
   type: ADD_ONE
 });

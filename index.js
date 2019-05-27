@@ -19,6 +19,12 @@ const myCoolReducer = (state = { counter: 0 }, action) => {
 
 let store = createStore(myCoolReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
 
+store.subscribe(() => {
+  const state = store.getState();
+  const node = document.getElementById("counter")
+  node.innerHTML = state.counter;
+})
+
 store.dispatch({ type: ADD_ONE });
 store.dispatch({ type: ADD_ONE });
 store.dispatch({ type: ADD_ONE });
