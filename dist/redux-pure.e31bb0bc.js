@@ -835,10 +835,27 @@ var _require = require("redux"),
 var myCoolReducer = function myCoolReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
   var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  if (action.type === "Add one dude") {
+    return state + 1;
+  }
+
   return state;
 };
 
 var store = createStore(myCoolReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
+store.dispatch({
+  type: "Add one dude"
+});
+store.dispatch({
+  type: "Add one dude"
+});
+store.dispatch({
+  type: "Add one dude"
+});
+store.dispatch({
+  type: "Add one dude"
+});
 },{"redux":"node_modules/redux/es/redux.js"}],"../../../.nvm/versions/node/v10.10.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
