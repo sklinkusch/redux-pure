@@ -829,32 +829,55 @@ if ("development" !== 'production' && typeof isCrushed.name === 'string' && isCr
   warning('You are currently using minified code outside of NODE_ENV === "production". ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or setting mode to production in webpack (https://webpack.js.org/concepts/mode/) ' + 'to ensure you have the correct code for your production build.');
 }
 },{"symbol-observable":"node_modules/symbol-observable/es/index.js"}],"index.js":[function(require,module,exports) {
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _require = require("redux"),
     createStore = _require.createStore;
 
+var ADD_ONE = "ADD_ONE";
+var REMOVE_ONE = "REMOVE_ONE";
+
 var myCoolReducer = function myCoolReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+    counter: 0
+  };
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
-  if (action.type === "Add one dude") {
-    return state + 1;
-  }
+  switch (action.type) {
+    case ADD_ONE:
+      return _objectSpread({}, state, {
+        counter: state.counter + 1
+      });
+    // means: const newState = {...state};
+    // newState.counter + 1;
+    // return newState;
+    // Attention: cases in switch not block-scoped
+    // Hint: Make {} around the cases, then it is block-scoped
 
-  return state;
+    case REMOVE_ONE:
+      return _objectSpread({}, state, {
+        counter: state.counter - 1
+      });
+
+    default:
+      return state;
+  }
 };
 
 var store = createStore(myCoolReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
 store.dispatch({
-  type: "Add one dude"
+  type: ADD_ONE
 });
 store.dispatch({
-  type: "Add one dude"
+  type: ADD_ONE
 });
 store.dispatch({
-  type: "Add one dude"
+  type: ADD_ONE
 });
 store.dispatch({
-  type: "Add one dude"
+  type: ADD_ONE
 });
 },{"redux":"node_modules/redux/es/redux.js"}],"../../../.nvm/versions/node/v10.10.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
